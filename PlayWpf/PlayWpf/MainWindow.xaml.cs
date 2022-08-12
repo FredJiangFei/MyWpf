@@ -33,5 +33,10 @@ namespace PlayWpf
                 txtName.Clear();
             }
         }
+
+        private void fileExitMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
