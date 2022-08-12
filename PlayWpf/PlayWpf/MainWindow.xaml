@@ -7,19 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" ResizeMode="CanMinimize">
     <Window.Resources>
-        <!-- .... other resources .... -->
-
-        <!--A Style that affects all TextBlocks-->
         <Style TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="FontFamily" Value="Comic Sans MS"/>
             <Setter Property="FontSize" Value="14"/>
         </Style>
 
-        <!--A Style that extends the previous TextBlock Style with an x:Key of TitleText-->
-        <Style BasedOn="{StaticResource {x:Type TextBlock}}"
-           TargetType="TextBlock"
-           x:Key="TitleText">
+        <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock" x:Key="TitleText">
             <Setter Property="FontSize" Value="26"/>
             <Setter Property="Foreground">
                 <Setter.Value>
@@ -32,34 +26,65 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <ControlTemplate x:Key="roundbutton" TargetType="Button">
+            <Grid>
+                <Ellipse x:Name="backgroundElement" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding Foreground}" />
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Fill" TargetName="backgroundElement" Value="AliceBlue"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
     </Window.Resources>
-
-    <Grid Margin="10">
+    
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="35" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <TextBlock Style="{StaticResource TitleText}">Header</TextBlock>
+        </Grid>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1">
+            <TabControl>
+                <TabItem Header="Add items">
+                    <Grid Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
 
-        <Label>Names</Label>
-        <ListBox Grid.Row="1" x:Name="lstNames" />
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" Margin="5,0,0,0">
-            <TextBox x:Name="txtName" />
-            <Button x:Name="btnAdd" Margin="0,5,0,0" Click="ButtonAddName_Click">Add Name</Button>
-            <TextBlock Style="{StaticResource TitleText}" Name="textblock1">My Pictures</TextBlock>
-            <TextBlock>Check out my new pictures!</TextBlock>
-        </StackPanel>
+                        <Label>Names</Label>
+                        <ListBox Grid.Row="1" x:Name="lstNames" />
 
-        <StackPanel Grid.Row="2" Grid.Column="1" Margin="5,0,0,0">
-            <Button Width="170" x:Name="btnClose" Click="fileExitMenuItem_Click">Close</Button>
-            <Button Width="170" x:Name="btnMessage" Click="messageBox_Click">Error</Button>
-        </StackPanel>
+                        <StackPanel Grid.Row="1" Grid.Column="1" Margin="5,0,0,0">
+                            <TextBox x:Name="txtName" />
+                            <Button x:Name="btnAdd" Margin="0,5,0,0" Click="ButtonAddName_Click">Add Name</Button>
+                        </StackPanel>
 
+                        <StackPanel Grid.Row="2" Grid.Column="1" Margin="5,0,0,0">
+                            <Button Width="170" x:Name="btnClose" Click="fileExitMenuItem_Click">Close</Button>
+                            <Button x:Name="btnMessage" Click="messageBox_Click" Template="{StaticResource roundbutton}" Width="65" Height="65">Error</Button>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Picture">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource TitleText}">Picture</TextBlock>
+                        <TextBlock>Check out my new pictures!</TextBlock>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </Grid>
     </Grid>
 </Window>
