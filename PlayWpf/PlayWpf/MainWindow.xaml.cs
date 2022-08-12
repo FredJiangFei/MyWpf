@@ -38,5 +38,10 @@ namespace PlayWpf
         {
             this.Close();
         }
+        
+        private void messageBox_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Oops!!! An unexpected error occurred, please contact administrator (-1).", "", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 }

@@ -6,8 +6,35 @@
         xmlns:local="clr-namespace:PlayWpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" ResizeMode="CanMinimize">
-    <Grid Margin="10">
+    <Window.Resources>
+        <!-- .... other resources .... -->
 
+        <!--A Style that affects all TextBlocks-->
+        <Style TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <!--A Style that extends the previous TextBlock Style with an x:Key of TitleText-->
+        <Style BasedOn="{StaticResource {x:Type TextBlock}}"
+           TargetType="TextBlock"
+           x:Key="TitleText">
+            <Setter Property="FontSize" Value="26"/>
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Offset="0.0" Color="#90DDDD" />
+                            <GradientStop Offset="1.0" Color="#5BFFFF" />
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -25,8 +52,14 @@
         <StackPanel Grid.Row="1" Grid.Column="1" Margin="5,0,0,0">
             <TextBox x:Name="txtName" />
             <Button x:Name="btnAdd" Margin="0,5,0,0" Click="ButtonAddName_Click">Add Name</Button>
+            <TextBlock Style="{StaticResource TitleText}" Name="textblock1">My Pictures</TextBlock>
+            <TextBlock>Check out my new pictures!</TextBlock>
         </StackPanel>
 
-        <Button Width="170" Grid.Row="2" Grid.Column="1" x:Name="btnClose" Click="fileExitMenuItem_Click">Close</Button>
+        <StackPanel Grid.Row="2" Grid.Column="1" Margin="5,0,0,0">
+            <Button Width="170" x:Name="btnClose" Click="fileExitMenuItem_Click">Close</Button>
+            <Button Width="170" x:Name="btnMessage" Click="messageBox_Click">Error</Button>
+        </StackPanel>
+
     </Grid>
 </Window>
