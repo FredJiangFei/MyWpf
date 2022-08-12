@@ -3,11 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:convert="clr-namespace:PlayWpf.Core.Converter" 
         xmlns:local="clr-namespace:PlayWpf"
+        xmlns:convert="clr-namespace:PlayWpf.Core.Converter" 
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" ResizeMode="CanMinimize">
     <Window.Resources>
+        <convert:YesNoToBooleanConverter x:Key="YesNoToBooleanConverter" />
+        <convert:SingleValueConverter x:Key="SingleValueConverter" />
         <Style TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="FontFamily" Value="Comic Sans MS"/>
@@ -49,7 +51,8 @@
         <Grid Grid.Row="0">
             <WrapPanel>
                 <Label Content="Port" VerticalAlignment="Center"></Label>
-                <ComboBox Name="cmbPort" Width="100" Height="20" Margin="5,0,5,0" FocusManager.FocusedElement="{Binding ElementName=cmbPort}" 
+                <ComboBox Name="cmbPort" Width="100" Height="20" Margin="5,0,5,0" FocusManager.FocusedElement="{Binding ElementName=cmbPort}"
+                          IsEnabled="{Binding ConnectStatus,Converter={StaticResource SingleValueConverter},ConverterParameter=true:false:true}" 
                           ItemsSource="{Binding PortList}" 
                           SelectedItem="{Binding SelectedPort,IsAsync=False}" />
                 <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="2,0,2,0" />
@@ -98,6 +101,12 @@
                     <StackPanel>
                         <TextBlock Style="{StaticResource TitleText}">Picture</TextBlock>
                         <TextBlock>Check out my new pictures!</TextBlock>
+                        <TextBox Name="txtValue" />
+                        <WrapPanel Margin="0,10">
+                            <TextBlock Text="Current value is: " />
+                            <TextBlock Text="{Binding ElementName=txtValue, Path=Text, Converter={StaticResource YesNoToBooleanConverter}}"></TextBlock>
+                        </WrapPanel>
+                        <CheckBox IsChecked="{Binding ElementName=txtValue, Path=Text, Converter={StaticResource YesNoToBooleanConverter}}" Content="Yes" />
                     </StackPanel>
                 </TabItem>
             </TabControl>
