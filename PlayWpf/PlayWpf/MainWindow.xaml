@@ -109,6 +109,32 @@
                         <CheckBox IsChecked="{Binding ElementName=txtValue, Path=Text, Converter={StaticResource YesNoToBooleanConverter}}" Content="Yes" />
                     </StackPanel>
                 </TabItem>
+                <TabItem Header="Form">
+                    <StackPanel>
+                        <Border Background="LightGray" BorderBrush="Black" Margin="3" BorderThickness="1">
+                            <DockPanel >
+                                <TextBlock DockPanel.Dock="Left" Text="Enter your name:" 
+                               Margin="3" VerticalAlignment="Center"/>
+                                <TextBox  Margin="3" x:Name="NameTextBox"/>
+                            </DockPanel>
+                        </Border>
+
+                        <Border Background="LightGray" BorderBrush="Black" Margin="3" BorderThickness="1">
+                            <DockPanel >
+                                <TextBlock DockPanel.Dock="Left" Text="Enter your zip code:" Margin="3" VerticalAlignment="Center"/>
+                                <TextBox  Margin="3" x:Name="ZipTextBox"/>
+                            </DockPanel>
+                        </Border>
+
+                        <Border Background="LightGray" BorderBrush="Black" Margin="3" BorderThickness="1">
+                            <DockPanel >
+                                <TextBlock DockPanel.Dock="Left" Text="Enter your birthday:" Margin="3" VerticalAlignment="Center"/>
+                                <TextBox  Margin="3" x:Name="BirthdayTextBox"/>
+                            </DockPanel>
+                        </Border>
+                        <Button Width="100" HorizontalAlignment="Left" Click="OnOKClick" Margin="3">OK</Button>
+                    </StackPanel>
+                </TabItem>
             </TabControl>
         </Grid>
     </Grid>
