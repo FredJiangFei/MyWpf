@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:convert="clr-namespace:PlayWpf.Core.Converter" 
         xmlns:local="clr-namespace:PlayWpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" ResizeMode="CanMinimize">
@@ -46,7 +47,12 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <TextBlock Style="{StaticResource TitleText}">Header</TextBlock>
+            <WrapPanel>
+                <Label Content="Port" VerticalAlignment="Center"></Label>
+                <ComboBox Name="cmbPort" Width="100" Height="20" Margin="5,0,5,0" FocusManager.FocusedElement="{Binding ElementName=cmbPort}" 
+                          ItemsSource="{Binding PortList}" 
+                          SelectedItem="{Binding SelectedPort,IsAsync=False}" />
+            </WrapPanel>
         </Grid>
 
         <Grid Grid.Row="1">
