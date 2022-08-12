@@ -43,46 +43,46 @@ namespace PlayWpf
 
         private void CheckName()
         {
-            var name = NameTextBox.Text;
+            var name = NameControl.Tag?.ToString();
             if (name == null || name.Length <= 3)
-                ShowAsError(NameTextBox);
+                ShowAsError(NameControl);
             else
-                ShowAsSuccess(NameTextBox);
+                ShowAsSuccess(NameControl);
         }
 
         private void CheckZip()
         {
-            var zip = ZipTextBox.Text;
+            var zip = ZipControl.Tag?.ToString();
             if (zip == null || zip.Length != 5)
             {
-                ShowAsError(ZipTextBox);
+                ShowAsError(ZipControl);
                 return;
             }
             int n;
             bool number = int.TryParse(zip, out n);
             if (number)
-                ShowAsSuccess(ZipTextBox);
+                ShowAsSuccess(ZipControl);
             else
-                ShowAsError(ZipTextBox);
+                ShowAsError(ZipControl);
         }
 
         private void CheckBirthday()
         {
-            var birthday = BirthdayTextBox.Text;
+            var birthday = BirthdayControl.Tag?.ToString();
             DateTime dt;
             bool isDate = DateTime.TryParse(birthday, out dt);
             if (isDate)
-                ShowAsSuccess(BirthdayTextBox);
+                ShowAsSuccess(BirthdayControl);
             else
-                ShowAsError(BirthdayTextBox);
+                ShowAsError(BirthdayControl);
         }
 
-        private void ShowAsError(TextBox tb)
+        private void ShowAsError(Control tb)
         {
             tb.Background = Brushes.IndianRed;
         }
 
-        private void ShowAsSuccess(TextBox tb)
+        private void ShowAsSuccess(Control tb)
         {
             tb.Background = Brushes.LightGreen;
         }

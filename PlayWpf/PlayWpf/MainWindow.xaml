@@ -41,6 +41,16 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
+
+
+        <ControlTemplate x:Key="FieldTemplate" TargetType="ContentControl">
+            <Border Background="LightGray">
+                <DockPanel >
+                    <TextBlock DockPanel.Dock="Left" Text="{TemplateBinding Content}" />
+                    <TextBox Margin="3" Background="{TemplateBinding Background}"/>
+                </DockPanel>
+            </Border>
+        </ControlTemplate>
     </Window.Resources>
     
     <Grid>
@@ -111,27 +121,9 @@
                 </TabItem>
                 <TabItem Header="Form">
                     <StackPanel>
-                        <Border Background="LightGray" BorderBrush="Black" Margin="3" BorderThickness="1">
-                            <DockPanel >
-                                <TextBlock DockPanel.Dock="Left" Text="Enter your name:" 
-                               Margin="3" VerticalAlignment="Center"/>
-                                <TextBox  Margin="3" x:Name="NameTextBox"/>
-                            </DockPanel>
-                        </Border>
-
-                        <Border Background="LightGray" BorderBrush="Black" Margin="3" BorderThickness="1">
-                            <DockPanel >
-                                <TextBlock DockPanel.Dock="Left" Text="Enter your zip code:" Margin="3" VerticalAlignment="Center"/>
-                                <TextBox  Margin="3" x:Name="ZipTextBox"/>
-                            </DockPanel>
-                        </Border>
-
-                        <Border Background="LightGray" BorderBrush="Black" Margin="3" BorderThickness="1">
-                            <DockPanel >
-                                <TextBlock DockPanel.Dock="Left" Text="Enter your birthday:" Margin="3" VerticalAlignment="Center"/>
-                                <TextBox  Margin="3" x:Name="BirthdayTextBox"/>
-                            </DockPanel>
-                        </Border>
+                        <ContentControl Content="Enter your name:" x:Name="NameControl" Template="{StaticResource FieldTemplate}" Background="Yellow"/>
+                        <ContentControl Content="Enter your zip code:" x:Name="ZipControl" Template="{StaticResource FieldTemplate}"/>
+                        <ContentControl Content="Enter your birthday:" x:Name="BirthdayControl" Template="{StaticResource FieldTemplate}"/>
                         <Button Width="100" HorizontalAlignment="Left" Click="OnOKClick" Margin="3">OK</Button>
                     </StackPanel>
                 </TabItem>
