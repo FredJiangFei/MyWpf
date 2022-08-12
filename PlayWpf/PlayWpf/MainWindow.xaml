@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PlayWpf"
         xmlns:convert="clr-namespace:PlayWpf.Core.Converter" 
+        xmlns:uc="clr-namespace:PlayWpf.View"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" ResizeMode="CanMinimize">
     <Window.Resources>
@@ -125,6 +126,12 @@
                         <ContentControl Content="Enter your zip code:" x:Name="ZipControl" Template="{StaticResource FieldTemplate}"/>
                         <ContentControl Content="Enter your birthday:" x:Name="BirthdayControl" Template="{StaticResource FieldTemplate}"/>
                         <Button Width="100" HorizontalAlignment="Left" Click="OnOKClick" Margin="3">OK</Button>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="UserControl">
+                    <StackPanel>
+                        <uc:LimitedInputUserControl Title="Enter title:" MaxLength="30" Height="50" />
+                        <uc:LimitedInputUserControl Title="Enter description:" MaxLength="140" Height="250"/>
                     </StackPanel>
                 </TabItem>
             </TabControl>
