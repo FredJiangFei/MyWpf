@@ -47,6 +47,48 @@
 
         <Grid Grid.Row="1">
             <TabControl>
+                <TabItem Header="Write Tag">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="450"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Grid Grid.Column="0" Margin="2,0,2,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="70"></RowDefinition>
+                                <RowDefinition Height="100"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="35"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <GroupBox Grid.Row="0" Header="Setup">
+                                
+                            </GroupBox>
+                            <GroupBox Grid.Row="1" Header="Control">
+                                
+                            </GroupBox>
+                            <GroupBox Grid.Row="2" Header="Results">
+                              
+                            </GroupBox>
+                            <WrapPanel Grid.Row="3" VerticalAlignment="Center">
+                                <Button Height="20" Content="Save Results" Tag="&#xe65c;" Width="100" Margin="10,0,0,0" />
+                            </WrapPanel>
+                        </Grid>
+                        
+                        <Grid Grid.Column="1" Margin="2,0,2,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="35"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <GroupBox Grid.Row="0" Header="Data">
+                            </GroupBox>
+                            <WrapPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                <Button Height="20" Width="150" Content="Export Tag Write List" Margin="10,0,10,0"></Button>
+                                <Button Height="20" Width="100" Content="Exit Program" Margin="10,0,10,0"></Button>
+                            </WrapPanel>
+                        </Grid>
+                    </Grid>
+                </TabItem>
                 <TabItem Header="Add items">
                     <uc:AddItemUserControl />
                 </TabItem>
