@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="PlayWpf.View.PictureControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PlayWpf.View"
+             xmlns:convert="clr-namespace:PlayWpf.Core.Converter" 
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <convert:YesNoToBooleanConverter x:Key="YesNoToBooleanConverter" />
+        <Style TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock" x:Key="TitleText">
+            <Setter Property="FontSize" Value="26"/>
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Offset="0.0" Color="#90DDDD" />
+                            <GradientStop Offset="1.0" Color="#5BFFFF" />
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <StackPanel>
+        <TextBlock Style="{StaticResource TitleText}">Picture</TextBlock>
+        <TextBlock>Check out my new pictures!</TextBlock>
+        <TextBox Name="txtValue" />
+        <WrapPanel Margin="0,10">
+            <TextBlock Text="Current value is: " />
+            <TextBlock Text="{Binding ElementName=txtValue, Path=Text, Converter={StaticResource YesNoToBooleanConverter}}"></TextBlock>
+        </WrapPanel>
+        <CheckBox IsChecked="{Binding ElementName=txtValue, Path=Text, Converter={StaticResource YesNoToBooleanConverter}}" Content="Yes" />
+    </StackPanel>
+</UserControl>

@@ -9,41 +9,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" ResizeMode="CanMinimize">
     <Window.Resources>
-        <convert:YesNoToBooleanConverter x:Key="YesNoToBooleanConverter" />
         <convert:SingleValueConverter x:Key="SingleValueConverter" />
-        <Style TargetType="TextBlock">
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="FontFamily" Value="Comic Sans MS"/>
-            <Setter Property="FontSize" Value="14"/>
-        </Style>
-
-        <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock" x:Key="TitleText">
-            <Setter Property="FontSize" Value="26"/>
-            <Setter Property="Foreground">
-                <Setter.Value>
-                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                        <LinearGradientBrush.GradientStops>
-                            <GradientStop Offset="0.0" Color="#90DDDD" />
-                            <GradientStop Offset="1.0" Color="#5BFFFF" />
-                        </LinearGradientBrush.GradientStops>
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <ControlTemplate x:Key="roundbutton" TargetType="Button">
-            <Grid>
-                <Ellipse x:Name="backgroundElement" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding Foreground}" />
-                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-            </Grid>
-            <ControlTemplate.Triggers>
-                <Trigger Property="IsMouseOver" Value="true">
-                    <Setter Property="Fill" TargetName="backgroundElement" Value="AliceBlue"/>
-                </Trigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
-
-
         <ControlTemplate x:Key="FieldTemplate" TargetType="ContentControl">
             <Border Background="LightGray">
                 <DockPanel >
@@ -82,43 +48,10 @@
         <Grid Grid.Row="1">
             <TabControl>
                 <TabItem Header="Add items">
-                    <Grid Margin="10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Label>Names</Label>
-                        <ListBox Grid.Row="1" x:Name="lstNames" />
-
-                        <StackPanel Grid.Row="1" Grid.Column="1" Margin="5,0,0,0">
-                            <TextBox x:Name="txtName" />
-                            <Button x:Name="btnAdd" Margin="0,5,0,0" Click="ButtonAddName_Click">Add Name</Button>
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="2" Grid.Column="1" Margin="5,0,0,0">
-                            <Button Width="170" x:Name="btnClose" Click="fileExitMenuItem_Click">Close</Button>
-                            <Button x:Name="btnMessage" Click="messageBox_Click" Template="{StaticResource roundbutton}" Width="65" Height="65">Error</Button>
-                        </StackPanel>
-                    </Grid>
+                    <uc:AddItemUserControl />
                 </TabItem>
                 <TabItem Header="Picture">
-                    <StackPanel>
-                        <TextBlock Style="{StaticResource TitleText}">Picture</TextBlock>
-                        <TextBlock>Check out my new pictures!</TextBlock>
-                        <TextBox Name="txtValue" />
-                        <WrapPanel Margin="0,10">
-                            <TextBlock Text="Current value is: " />
-                            <TextBlock Text="{Binding ElementName=txtValue, Path=Text, Converter={StaticResource YesNoToBooleanConverter}}"></TextBlock>
-                        </WrapPanel>
-                        <CheckBox IsChecked="{Binding ElementName=txtValue, Path=Text, Converter={StaticResource YesNoToBooleanConverter}}" Content="Yes" />
-                    </StackPanel>
+                    <uc:PictureControl />
                 </TabItem>
                 <TabItem Header="Form">
                     <StackPanel>
