@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:PlayWpf"
         xmlns:convert="clr-namespace:PlayWpf.Core.Converter" 
         xmlns:uc="clr-namespace:PlayWpf.View"
+        xmlns:c="clr-namespace:System.Collections;assembly=mscorlib"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" ResizeMode="CanMinimize">
     <Window.Resources>
@@ -18,6 +19,36 @@
                 </DockPanel>
             </Border>
         </ControlTemplate>
+        <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" BorderBrush="red" BorderThickness="2">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <DataTemplate DataType="{x:Type local:Unit}">
+            <Grid>
+                <StackPanel Orientation="Horizontal">
+                    <Grid>
+                        <Rectangle Stroke="Yellow" Fill="Orange" Width="{Binding Price}" />
+                        <TextBlock Text="{Binding Year}" />
+                    </Grid>
+                    <TextBlock Text="{Binding Price}" Margin="5,0" />
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
+        <c:ArrayList x:Key="ds">
+            <local:Unit Year="2001" Price="100" />
+            <local:Unit Year="2002" Price="200" />
+        </c:ArrayList>
     </Window.Resources>
     
     <Grid>
@@ -108,6 +139,24 @@
                         <uc:LimitedInputUserControl Title="Enter title:" MaxLength="30" Height="50" />
                         <uc:LimitedInputUserControl Title="Enter description:" MaxLength="140" Height="250"/>
                     </StackPanel>
+                </TabItem>
+                <TabItem Header="FillRemain">
+                    <DockPanel Height="Auto" Name="stackPanel1" Width="Auto" LastChildFill="True">
+                        <TextBox DockPanel.Dock="Left" Height="23" Name="textBox1" Width="Auto">xxxxxx</TextBox>
+                        <TextBox DockPanel.Dock="Left" Height="23" Name="textBox2" Width="Auto">cccccc</TextBox>
+                        <Button Content="Button" Name="button1" Width="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                    </DockPanel>
+                </TabItem>
+                <TabItem Header="ControlTemplate" Height="19" VerticalAlignment="Top">
+                    <StackPanel>
+                        <TextBox Height="23" Width="Auto">xxxxxx</TextBox>
+                        <TextBox Style="{x:Null}" Height="23" Width="Auto">cccccc</TextBox>
+                        <Button Content="Button" Width="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="DataTemplate" Height="19" VerticalAlignment="Top">
+                    <ListBox ItemsSource="{StaticResource ds}" />
+                    <!--<ComboBox ItemsSource="{StaticResource ds}" Margin="5"/>-->
                 </TabItem>
             </TabControl>
         </Grid>
