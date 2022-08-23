@@ -3,6 +3,7 @@ using PlayWpf.ViewModel;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 
 namespace PlayWpf
@@ -10,10 +11,14 @@ namespace PlayWpf
     public partial class MainWindow : Window
     {
         MainWindowViewModel viewModel = new MainWindowViewModel();
+
         public MainWindow()
         {
             InitializeComponent();
             this.DataContext = viewModel;
+            //stu2 = new Student();
+            //Binding binding = new Binding("Text") { Source = t1 };
+            //t2.SetBinding(TextBox.TextProperty, binding);
         }
 
         private void OnOKClick(object sender, RoutedEventArgs e)
@@ -71,9 +76,10 @@ namespace PlayWpf
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            //MessageBox.Show(stu2.GetValue(Student.NameProperty).ToString());
             var stu = new Student();
-            stu.SetValue(Student.NameProperty, this.t1.Text);
-            t2.Text = (string)stu.GetValue(Student.NameProperty);
+            stu.Name = this.t1.Text;
+            t2.Text = stu.Name;
         }
     }
 }
