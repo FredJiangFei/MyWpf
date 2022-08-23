@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Data;
 
 namespace PlayWpf.Models
 {
@@ -11,5 +12,10 @@ namespace PlayWpf.Models
         }
 
         public static readonly DependencyProperty NameProperty = DependencyProperty.Register("Name", typeof(string), typeof(Student));
+
+        public BindingExpressionBase SetBinding(DependencyProperty dp, BindingBase binding)
+        {
+            return BindingOperations.SetBinding(this, dp, binding);
+        }
     }
 }

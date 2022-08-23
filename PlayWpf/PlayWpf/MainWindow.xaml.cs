@@ -1,6 +1,7 @@
 ﻿using PlayWpf.Models;
 using PlayWpf.ViewModel;
 using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -8,19 +9,24 @@ using System.Windows.Media;
 
 namespace PlayWpf
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         MainWindowViewModel viewModel = new MainWindowViewModel();
 
+        Student stu2;
         public MainWindow()
         {
             InitializeComponent();
             this.DataContext = viewModel;
-            //stu2 = new Student();
-            //Binding binding = new Binding("Text") { Source = t1 };
-            //t2.SetBinding(TextBox.TextProperty, binding);
-        }
+            Text = "Initial Text";
 
+            stu2 = new Student();
+            Binding binding = new Binding("Text") { Source = t1 };
+
+            stu2.SetBinding(Student.NameProperty, binding);
+            t2.SetBinding(TextBox.TextProperty, new Binding("Name") { Source = stu2 });
+        }
+        
         private void OnOKClick(object sender, RoutedEventArgs e)
         {
             CheckName();
@@ -74,12 +80,38 @@ namespace PlayWpf
             tb.Background = Brushes.LightGreen;
         }
 
+        private string _Text;
+        public string Text
+        {
+            get { return _Text; }
+            set
+            {
+                if (value != _Text)
+                {
+                    _Text = value;
+                    NotifyPropertyChanged("Text");
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged(String info)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show(stu2.GetValue(Student.NameProperty).ToString());
+            //MessageBox.Show(stu2.Name);
+            Text = "clicked";
+
             var stu = new Student();
-            stu.Name = this.t1.Text;
-            t2.Text = stu.Name;
+            School.SetGrade(stu, 6);
+            int grade = School.GetGrade(stu);
+            MessageBox.Show(grade.ToString());
         }
     }
 }

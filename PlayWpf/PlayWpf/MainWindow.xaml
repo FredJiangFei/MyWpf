@@ -162,6 +162,7 @@
 
                 <TabItem Header="DependencyProperty">
                     <StackPanel>
+                        <uc:DepPro MyTextProperty="{Binding Text, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
                         <TextBox x:Name="t1" BorderBrush="Aqua" Margin="5" />
                         <TextBox x:Name="t2" BorderBrush="Aqua" Margin="5" />
                         <Button Content="OK" Margin="5" Click="Button_Click" />
