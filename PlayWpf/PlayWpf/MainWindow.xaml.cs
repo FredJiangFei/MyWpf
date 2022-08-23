@@ -1,4 +1,5 @@
-﻿using PlayWpf.ViewModel;
+﻿using PlayWpf.Models;
+using PlayWpf.ViewModel;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -66,6 +67,13 @@ namespace PlayWpf
         private void ShowAsSuccess(Control tb)
         {
             tb.Background = Brushes.LightGreen;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var stu = new Student();
+            stu.SetValue(Student.NameProperty, this.t1.Text);
+            t2.Text = (string)stu.GetValue(Student.NameProperty);
         }
     }
 }
